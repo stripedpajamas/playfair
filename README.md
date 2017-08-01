@@ -1,6 +1,6 @@
 # Playfair
 
-See [Playfair Cipher](https://en.wikipedia.org/wiki/Playfair_cipher) on Wikiepdia.
+See [Playfair Cipher](https://en.wikipedia.org/wiki/Playfair_cipher) on Wikipedia.
 
 Merges `i` and `j`, uses `x` as a pad. 
 
