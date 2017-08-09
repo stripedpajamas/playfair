@@ -19,10 +19,9 @@ class Playfair {
       ];
     }
   }
-  process({ input, decrypt }) {
-    if (!this.grid) return 'First set the key!';
+  preProcess({ input, decrypt }) {
     // split into duples, fixing double-letters (hello => he lx lo) and padding
-    const text = input.toLowerCase().replace(/[^a-z]/g, '').replace('j', 'i').split('').filter(x => x !== ' ');
+    const text = input.toLowerCase().replace(/[^a-z]/g, '').replace(/j/g, 'i').split('').filter(x => x !== ' ');
     const duples = [];
     for (let i = 0; i < text.length; i += 2) {
       const currentDuple = text.slice(i, i + 2);
@@ -53,6 +52,13 @@ class Playfair {
         return [row, col];
       }));
     });
+
+    return coordinates;
+  }
+  process({ input, decrypt }) {
+    if (!this.grid) return 'First set the key!';
+    if (input && decrypt && input.length % 2 !== 0) return 'Invalid ciphertext';
+    const coordinates = this.preProcess({ input, decrypt });
 
     // set modifiers to respond appropriately based on decrypt switch
     const modifier = decrypt ? -1 : 1;
